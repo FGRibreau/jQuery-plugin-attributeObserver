@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>jQuery PropertyObserver - Tests</title>
+	
+	<script type="text/javascript" charset="utf-8" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="http://github.com/jquery/qunit/raw/master/qunit/qunit.js"></script>
+	<link rel="stylesheet" href="http://github.com/jquery/qunit/raw/master/qunit/qunit.css" type="text/css" media="screen" charset="utf-8">
+	<style type="text/css" media="screen">
+		#qunit-fixture {display:none;}
+	</style>
+	<script type="text/javascript" charset="utf-8" src="../jQuery.PropertyObserver.js"></script>
+	
+	<script type="text/javascript" charset="utf-8" src="./test.jQuery.PropertyObserver.js"></script>
+</head>
+<body>
+
+<h1 id="qunit-header">jQuery-PropertyObserver - QUnit Test Suite</h1>
+<h2 id="qunit-banner"></h2>
+<div id="qunit-testrunner-toolbar"></div>
+<h2 id="qunit-userAgent"></h2>
+<ol id="qunit-tests"></ol>
+<div id="qunit-fixture">
+	<form action="form_action.php" method="get">
+		<div>
+			<label>First name</label>
+			<input type="hidden" name="plop" value="You ?" />
+			<input type="password" name="pwd" value="Are" />
+			<input type="text" name="fname" value="How" />
+			<label>Last name</label>
+			<input type="text" id="input" name="lname" value="World" />
+			<input type="submit" value="Hello" />
+		</div>
+	</form>
+	
+	<iframe src="about:blank" id="myiframe" />
+</div>
+</body>
+</html>
