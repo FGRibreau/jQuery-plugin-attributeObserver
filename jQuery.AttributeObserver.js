@@ -1,5 +1,5 @@
 /*
-  jQuery-PropertyObserver v0.1, by Francois-Guillaume Ribreau.
+  jQuery-AttributeObserver v0.1, by Francois-Guillaume Ribreau.
 
   Copyright (c)2010 Francois-Guillaume Ribreau. All rights reserved.
   Released under the Creative Commons BY-SA Conditions.
@@ -7,17 +7,17 @@
 
   Usage:
   	(init):
-  		$('#el').PropertyObserver(attr, callback, [delay]);
+  		$('#el').AttributeObserver(attr, callback, [delay]);
 	
   	(getters):
-  		$('#el').PropertyObserver(); //get the PropertyObserver instance
-  		$('#el').PropertyObserver().remove(); //Remove the PropertyObserver instance (& clear the timeout)
-  		$('#el').PropertyObserver().setOldValue(oldValue); //Set an old value (override the current one)
+  		$('#el').AttributeObserver(); //get the AttributeObserver instance
+  		$('#el').AttributeObserver().remove(); //Remove the AttributeObserver instance (& clear the timeout)
+  		$('#el').AttributeObserver().setOldValue(oldValue); //Set an old value (override the current one)
 */
 
-jQuery.fn.PropertyObserver = function(){
+jQuery.fn.AttributeObserver = function(){
 	
-	var PropertyObserver = function(el, attr, cb, delay){
+	var AttributeObserver = function(el, attr, cb, delay){
 		var el = el,
 				cb = cb,
 				delay = delay,
@@ -39,24 +39,29 @@ jQuery.fn.PropertyObserver = function(){
 			timeout = setTimeout(function(){check();}, delay);
 		}
 		
+		/* 
+		  The following methods could be moved 
+		  in AttributeObserver.prototype.
+		*/
 		this.setOldValue = function(value){
 			oldValue = value;
 		};
 		
 		this.remove = function(){
 			clearTimeout(timeout);
-			$.removeData(el, 'PropertyObserver');
+			$.removeData(el, 'AttributeObserver');
 			return $(el);
 		}
 		
 		check();
 	};
+
 	
 	/* Interface */
 	var args = arguments;
 	
 	if(args.length == 0){
-		return $.data(this[0], 'PropertyObserver');
+		return $.data(this[0], 'AttributeObserver');
 	}
 	
 	var cb
@@ -64,12 +69,12 @@ jQuery.fn.PropertyObserver = function(){
 		, delay = 1000;
 	
 	if(this.length == 0){
-		throw new Error('[PropertyObserver] Select one (or more) elements.');
+		throw new Error('[AttributeObserver] Select one (or more) elements.');
 		return false;
 	}
 	
 	if(typeof(args[0]) != 'string'){
-		throw new Error('[PropertyObserver] 1st argument must be a string');
+		throw new Error('[AttributeObserver] 1st argument must be a string');
 		return false;
 		
 	} else {
@@ -77,7 +82,7 @@ jQuery.fn.PropertyObserver = function(){
 	}
 	
 	if(typeof(args[1]) != 'function'){
-		throw new Error('[PropertyObserver] Second argument must be a function');
+		throw new Error('[AttributeObserver] Second argument must be a function');
 		return false;
 		
 	} else {
@@ -90,7 +95,7 @@ jQuery.fn.PropertyObserver = function(){
 	
 	var i = this.length;
 	while(i--){
-		$.data(this.eq(i)[0], 'PropertyObserver', new PropertyObserver(this[i], attr, cb, delay));
+		$.data(this.eq(i)[0], 'AttributeObserver', new AttributeObserver(this[i], attr, cb, delay));
 	}
 	
 	return this;

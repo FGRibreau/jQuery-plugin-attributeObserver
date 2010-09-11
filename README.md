@@ -1,13 +1,13 @@
-# jQuery PropertyObserver
+# jQuery AttributeObserver
 
-jQuery PropertyObserver allow developer to bind handler to listen to HTML element's property changes.
+jQuery AttributeObserver allow developer to bind handler to listen to HTML element's attribute changes.
 
 ## Usage
 	
-	$('#el').PropertyObserver(attr, callback, [delay]);
+	$('#el').AttributeObserver(attr, callback, [delay]);
 	
 	//Or in the real word:
 	
-	$('iframe').PropertyObserver('src', function(oldValue, newValue){
+	$('iframe').AttributeObserver('src', function(oldValue, newValue){
 		alert(['iFrame src attribute has changed from ',oldValue,' to ',newValue].join(''));
 	}, 1000);
