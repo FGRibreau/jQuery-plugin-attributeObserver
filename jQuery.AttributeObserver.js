@@ -13,6 +13,7 @@
   		$('#el').AttributeObserver(); //get the AttributeObserver instance
   		$('#el').AttributeObserver().remove(); //Remove the AttributeObserver instance (& clear the timeout)
   		$('#el').AttributeObserver().setOldValue(oldValue); //Set an old value (override the current one)
+  		$('#el').AttributeObserver().forceCheck([callback]); //Force a check (callback is optional)
 */
 
 jQuery.fn.AttributeObserver = function(){
@@ -25,13 +26,18 @@ jQuery.fn.AttributeObserver = function(){
 				timeout = null;
 		
 		function check(){
-			var newValue = el.getAttribute(attr);
+			var newValue = typeof(attr) == 'function' ? attr(el) : el.getAttribute(attr);
 			
 			if(oldValue === false){
 			  oldValue = newValue;
 			}
       
 			if(oldValue != newValue){
+			  
+			  if(typeof(forceCheckCb) == 'function'){
+					forceCheckCb(oldValue, newValue, el);
+				}
+        				
 				cb(oldValue, newValue);
 				oldValue = newValue;
 			}
@@ -53,6 +59,11 @@ jQuery.fn.AttributeObserver = function(){
 			return $(el);
 		}
 		
+		this.forceCheck = function(forceCheckCb){
+			clearTimeout(timeout);
+			check(forceCheckCb);
+    };
+
 		check();
 	};
 
@@ -73,8 +84,8 @@ jQuery.fn.AttributeObserver = function(){
 		return false;
 	}
 	
-	if(typeof(args[0]) != 'string'){
-		throw new Error('[AttributeObserver] 1st argument must be a string');
+	if(typeof(args[0]) != 'string' && typeof(args[0]) != 'function'){
+		throw new Error('[AttributeObserver] 1st argument must be a string or a function');
 		return false;
 		
 	} else {

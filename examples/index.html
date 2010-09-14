@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Demo - AttributeObserver</title>
+<style>
+  #myiframe{width:100%;height:400px}
+</style>
+</head>
+<body>
+  <p id="hello">Navigate through the iframe, <strong>a callback will be fired</strong> on every page change.</p>
+  
+  <iframe id="myiframe" src="./frame/p1.html"></iframe>
+  
+  <!-- jQuery + AttributeObserver-->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript" src="../jQuery.AttributeObserver.js"></script>
+	
+<script type="text/javascript" charset="utf-8">
+		$(function(){
+		    var myCallback = function(oldValue, newValue){
+		        alert(['Src change from "'
+		               , oldValue
+		               , '" to "'
+		               ,newValue
+		               , '"'].join(''));
+		    };
+
+		   $('#myiframe').AttributeObserver(function(el){
+			try{return el.contentWindow.location;}catch(e){return false;}
+			}, myCallback, 5000);
+		});
+</script>
+</body>
+</html>
