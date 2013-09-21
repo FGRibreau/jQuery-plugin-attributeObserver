@@ -1,4 +1,4 @@
-# jQuery AttributeObserver
+# jQuery AttributeObserver [![Gittip](http://badgr.co/gittip/fgribreau.png)](https://www.gittip.com/fgribreau/)
 
 jQuery AttributeObserver allow developer to bind handler to listen to HTML element's attribute changes.
 
