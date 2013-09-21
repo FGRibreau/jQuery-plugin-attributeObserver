@@ -16,3 +16,6 @@ jQuery AttributeObserver allow developer to bind handler to listen to HTML eleme
 	$('iframe').AttributeObserver('src', function(oldValue, newValue){
 		alert(['iFrame src changed from ',oldValue,' to ',newValue].join(''));
 	}, 1000);
+	
+## Donate
+[Donate Bitcoins](https://coinbase.com/checkouts/fc3041b9d8116e0b98e7d243c4727a30)
