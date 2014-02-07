@@ -25,7 +25,7 @@ jQuery.fn.AttributeObserver = function(){
 				oldValue = false,
 				timeout = null;
 		
-		function check(){
+		function check(el){
 			var newValue = typeof(attr) == 'function' ? attr(el) : el.getAttribute(attr);
 			
 			if(oldValue === false){
@@ -38,11 +38,11 @@ jQuery.fn.AttributeObserver = function(){
 					forceCheckCb(oldValue, newValue, el);
 				}
         				
-				cb(oldValue, newValue);
+				$.proxy(cb,el)(oldValue, newValue);
 				oldValue = newValue;
 			}
 			
-			timeout = setTimeout(function(){check();}, delay);
+			timeout = setTimeout(function(){check(el);}, delay);
 		}
 		
 		/* 
@@ -64,7 +64,7 @@ jQuery.fn.AttributeObserver = function(){
 			check(forceCheckCb);
     };
 
-		check();
+		check(el);
 	};
 
 	
